@@ -4,26 +4,33 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 import os
 from dotenv import load_dotenv
 
-#Load api key
+# Load API key
 load_dotenv()
-GEMINI_API = os.getenv("GEMINI_API")
+GEMINI_API_KEY = os.getenv("GEMINI_API")
 
 def genrate_blog(topic):
-    """Genrates a full blog post based on a given topic using gemini-2.5"""
-    template = """ write a detailed blog post on the topic "{topic}".
+    """Generates a full blog post on a given topic using Gemini 1.5 Pro."""
+    
+    template = """
+    Write a detailed blog post on the topic "{topic}".
     - Include an engaging introduction
     - Provide 3 key points with explanations
     - Use SEO-friendly keywords
-    - End with a conclution and call to action
-
-    return the blog in structured markdown formate.
+    - End with a strong conclusion and call-to-action.
+    Return the blog in structured markdown format.
     """
 
-    propmt = PromptTemplate(
-        input_variables=['topic'],
+    prompt = PromptTemplate(
+        input_variables=["topic"],
         template=template
-        )
-    llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.7)
-    chain = LLMChain(llm=llm,propmt=propmt)
+    )
+
+    llm = ChatGoogleGenerativeAI(
+        model="gemini-2.5-pro",
+        temperature=0.7,
+        google_api_key=GEMINI_API_KEY
+    )
+
+    chain = LLMChain(llm=llm, prompt=prompt)
 
     return chain.run(topic=topic)

@@ -4,7 +4,7 @@ from backend.genrate_blog import genrate_blog
 
 app = Flask(__name__)
 
-@app.route('/genrate',methods=['POST'])
+@app.route('/generate',methods=['POST'])
 def generate_blog_endpoint():
     """Handle blog generation requests"""
     data = request.json
@@ -24,4 +24,4 @@ def generate_blog_endpoint():
 
 if __name__ == "__main__":
     os.makedirs("blogs",exist_ok=True)
-    app.run(host="0.0.0.0",port=5000,debug=True)
+    app.run(debug=True)
