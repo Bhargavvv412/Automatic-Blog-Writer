@@ -8,6 +8,7 @@ list_of_files=[
     "./github/workflows/.gitkeep",
     "backend/genrate_blog.py",
     "app.py",
+    "endpoint.py"
     ".env",
     "Dockerfile",
     "requirements.txt",
